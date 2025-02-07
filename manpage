@@ -1,0 +1,31 @@
+.TH CONPLEX 1 "January 2025" "Version 1.0" "User Commands"
+.SH NAME
+conplex \- A compact solution for shared conda environments.
+.SH SYNOPSIS
+.B conplex
+[\fIOPTIONS\fR] [\fIFILE\fR...]
+.SH DESCRIPTION
+The \fBmytool\fR script is used to demonstrate creating traditional Unix manual pages for a Bash tool.
+.SH OPTIONS
+.TP
+\fB\ list\fR
+list all conda environments available to conplex in tabular format. conplex list provides a name, version, tag and notes/list of stable commands for each environment.
+.TP
+\fB\ load\fR
+load a conda environment specified by name and version (optional). This function wraps around conda activate.
+.TP
+\fB\ unload\fR
+unload the currently loaded conplex environment.
+.TP
+\fB\ help\fR
+prints this help message.
+.TP
+.SH EXAMPLES
+Load an environment named test at version v1.2
+.IP
+.B conplex load test v1.2
+.SH AUTHOR
+Lucas Koch lucas.koch@gmail.com
+.SH COPYRIGHT
+Copyright (C) 2025 Lucas Koch.
+Licensed under the GPL v3 license.
