@@ -34,14 +34,38 @@ print_intro() {
 }
 
 list_envs() {
-  (echo -e "\e[1mName\e[0m\t\e[1mVersion\e[0m\t\e[1mTags\e[0m\t\e[1mNotes\e[0m"; cut $CONPLEX_ENVS_FILE -f1,2,3,4,7) | column -s $'\t' -t -o "  |  "
+  local filter=$1
+  local file=$CONPLEX_ENVS_FILE
+
+  # Header
+  local header
+  header=$(echo -e "\e[1mName\e[0m\t\e[1mVersion\e[0m\t\e[1mTags\e[0m\t\e[1mNotes\e[0m")
+
+  if [[ -n "$filter" ]]; then
+    # Normalize filter: trim + lowercase
+    filter=$(echo "$filter" | awk '{$1=$1; print tolower($0)}')
+    (
+      echo -e "$header"
+      awk -F'\t' -v name="$filter" '
+        {
+          key = tolower($1); gsub(/^[ \t]+|[ \t]+$/, "", key);
+          if (key == name) print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $7
+        }
+      ' "$file"
+    ) | column -s $'\t' -t -o "  |  "
+  else
+    (
+      echo -e "$header"
+      cut -f1,2,3,4,7 "$file"
+    ) | column -s $'\t' -t -o "  |  "
+  fi
 }
 
 load_env() {
     local name=$1
     # Assume latest version if no version is specified
     local tag=${2:-latest}
-    while IFS=$'\t' read -r rec_name rec_version rec_status stable_commands post_load_message rec_path; do
+    while IFS=$'\t' read -r rec_name rec_version rec_status _stable_commands post_load_message rec_path; do
         if [[ "$rec_name" == "$name" && ("$rec_version" == "$tag" || "$tag" == "latest")  ]]; then
         # clean rec_path
         path=$(echo "$rec_path" | xargs)
@@ -74,7 +98,7 @@ function print_help() {
 main() {
   case "$1" in
     list)
-      list_envs
+      list_envs "$2"
       ;;
     load)
         load_env "$2" "$3"

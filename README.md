@@ -1,6 +1,23 @@
-# About this project
-[![ShellCheck](https://img.shields.io/badge/code%20style-shellcheck-green)](https://www.shellcheck.net/) [![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](#) [![License](https://img.shields.io/github/license/lukekoch/conplex)](https://github.com/lukekoch/conplex/blob/main/LICENSE) [![Man Pages](https://img.shields.io/badge/docs-man%20pages-blueviolet)](#)
- [![Repository Size](https://img.shields.io/github/repo-size/lukekoch/conplex.svg)](https://github.com/lukekoch/conplex) 
+# Conplex
+
+<p align="center">
+  <a href="https://www.shellcheck.net/">
+    <img src="https://img.shields.io/badge/code%20style-shellcheck-green" alt="ShellCheck">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/dependencies-none-brightgreen" alt="Dependencies">
+  </a>
+  <a href="https://github.com/lukekoch/conplex/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/lukekoch/conplex" alt="License">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/docs-man%20pages-blueviolet" alt="Man Pages">
+  </a>
+  <a href="https://github.com/lukekoch/conplex">
+    <img src="https://img.shields.io/github/repo-size/lukekoch/conplex.svg" alt="Repository Size">
+  </a>
+</p>
+
 
 conda environments are a great choice for managing software installations for a large group of users especially in the computer science spaces. However, if users install the same software in their own conda installation (thus their own home directories), the resulting redundancy can seriously impact the performance of NFS or similar network storage solutions. Shared conda environments are the obvious solution. conplex offers functionalities to ease the usage and setup of these environments especially for beginner-level end users. Installing conplex requires no special privileges or dependencies and takes less than 10 minutes. conplex is not intended to replace higher-level module-style management solutions like [environment modules](https://modules.readthedocs.io/en/latest/index.html#).
 
@@ -19,7 +36,7 @@ Before the setting up complex, perform the following steps:
 3. Create a `envs.tsv` file
 4. Export the path to the TSV file to the `CONPLEX_ENVS_FILE` variable
 
-In total you need 4 commands
+In total you need 2 commands
 ```bash
 touch /path/to/env-dir/envs.tsv
 echo 'CONPLEX_ENVS_FILE=/path/to/env-dir/envs.tsv' >> ~/.bashrc
@@ -49,6 +66,13 @@ echo 'alias conplex="source ~/bin/conplex.sh"' >> ~/.bashrc
 Source your .bashrc `source ~/.bashrc`, then check that conplex is available using `conplex`. You can now list all available environments using ``conplex list``.
 
 Note: The alias in combination with `source` is required in order for conplex to load the conda environment in the parent shell.
+
+## Autocompletion
+conplex can autocomplete environment names and versions on `conplex list` and `conplex load`. To set up autocompletion, make the `conplex_autocomplete.sh` file executable and source it in your bashrc.
+
+```bash
+echo 'source /path/to/conplex_autocomplete.sh' >> ~/.bashrc
+```
 
 
 # Remarks on user permissions
