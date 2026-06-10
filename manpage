@@ -25,7 +25,7 @@ Load an environment named test at version v1.2
 .IP
 .B conplex load test v1.2
 .SH AUTHOR
-Lucas Koch lucas.koch@gmail.com
+Lucas Koch mail.lucas.koch@gmail.com
 .SH COPYRIGHT
 Copyright (C) 2025 Lucas Koch.
 Licensed under the GPL v3 license.
