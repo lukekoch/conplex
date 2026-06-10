@@ -70,9 +70,9 @@ load_env() {
         # clean rec_path
         path=$(echo "$rec_path" | xargs)
         # format command prompt prefix and activate
-        CONDA_ENV_PROMPT='(\e[92mconplex\e[0m → \e[94m{name}\e[0m) ' conda activate "$path"
+        CONDA_ENV_PROMPT='(conplex > {name}) ' conda activate "$path"
         
-        if [ -d "$path" ] && [ -r "$path" ]; then
+        if [ -d "$path" ] && [ -w "$path" ]; then
             echo -e "\e[41mWarning: You have write permission for this environment.\e[0m"
         fi
         echo -e "\e[34mNotes:\e[0m $post_load_message"
@@ -80,7 +80,7 @@ load_env() {
         return
         fi
     done < "$CONPLEX_ENVS_FILE"
-    echo "Environment $name not found for version $tag."
+    echo "Environment $name not found for version $tag. Use 'conplex list $name' to inspect available environments and specify a different version. You may also use TAB to autocomplete versions if enabled."
 }
 
 
